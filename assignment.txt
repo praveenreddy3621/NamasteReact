@@ -1,0 +1,20 @@
+1. What is Emmet?
+
+
+Async & Defer in Javascript
+
+React.createElement --> return a React Element (which is nothing but a object)
+createElement(type, props, children)
+
+React.createRoot(// need to pass the DOM node)
+
+DocumentContentLoaded ==> event will trigger when after HTML document is completely parsed and all defered scripts are 
+downloaded (fetcehd) & executed
+
+
+Normal -->HTML Parsing ---> Script fetching, execution ----> HTML Parsing
+Async --->HTML Parsing ---->
+            Scripts laoding ----> executing scripts --->HTML Parsing
+
+Defer --->HTML Parsing ----> 
+            Scripts laoding ----->HTML Parsing ---> Script  Executing
