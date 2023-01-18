@@ -1,0 +1,17 @@
+
+
+Virtual DOM:
+  Virtual DOM is the representation of actiual DOM (Which we keep in our code)
+Node:
+ Node is the actual individual element in the virtual DOM
+Tree:
+ Is the collection of Nodes ( Virtual Representation of DOM)
+
+Reconciliation:
+  Reconciliation is the alogrithm React uses to diff one tree with another to determine which
+  parts needs to be changed.
+
+  Reconciliation is process that React uses to update virtual DOM and the actual DOM when
+  the state of the component chnages. It compares the current virtual DOM with the new 
+  virtual DOM that is created after a change, and determines the minimum number of changes
+  that need to be made to the actual DOM to bring it inline with the new Virtual DOM tree.
