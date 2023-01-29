@@ -1,17 +1,17 @@
 import { useForm } from "react-hook-form";
 
 export const Form = (props) => {
-    console.log(".....props>>>>", props)
+    // console.log(".....props>>>>", props)
     const {onChange} = props;
-    console.log(".....onChange>>>>", onChange)
+    // console.log(".....onChange>>>>", onChange)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  console.log("....errors>>>", errors);
-  console.log("....>>>> register>>>", register("abc"))
+  // console.log("....errors>>>", errors);
+  // console.log("....>>>> register>>>", register("abc"))
 
   const Controller = ({control, register, name, render}) => {
     return null;
@@ -21,7 +21,7 @@ export const Form = (props) => {
     <form
       style={{ marginTop: "50px" }}
       onSubmit={handleSubmit((data) => {
-        console.log("...data>>>", data);
+        //console.log("...data>>>", data);
       })}
     >
       <label>First Name :</label>
