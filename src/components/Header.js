@@ -1,9 +1,9 @@
-import { useState } from "react";
 import Logo from "../assets/image/download.jpeg";
 import { Link } from "react-router-dom";
+import useOnline from "../hooks/useOnline";
+import useAuth from "../hooks/useAuth"
 
 // SPA - Single Page Applications
-//
 const Title = () => {
   return (
     <div className="title">
@@ -18,7 +18,9 @@ export const loggedInUser = () => {
 };
 
 export const Header = () => {
-  const [isLogged, setIsLogged] = useState(false);
+  const isOnline = useOnline();
+  const {handleClick, isLogged} = useAuth();
+
 
   return (
     <div key="header-key" className="header">
@@ -33,25 +35,18 @@ export const Header = () => {
         <Link to="/contact">
           <li key="key3">Contact</li>
         </Link>
+        <Link to='/instamart'>
+          <li key="key3">
+            Instamart
+          </li>
+        </Link>
         <li key="key4">Cart</li>
       </ul>
-      {isLogged ? (
-        <button
-          onClick={() => {
-            setIsLogged(false);
-          }}
-        >
-          Log Out
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            setIsLogged(true);
-          }}
-        >
-          Log In
-        </button>
-      )}
+      {isOnline ? "✅" : "🔴"}
+      {<button
+        onClick={handleClick}>
+        {isLogged ? "LogOut" : "LogIn"}
+      </button>}
     </div>
   );
 };

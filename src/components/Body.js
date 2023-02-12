@@ -1,5 +1,8 @@
 import RestaurentCard from "./RestaurentCard";
 import { useState, useEffect } from "react";
+import {filterRestaurents} from "../utils/helper"
+import useRestaurents from "../hooks/useRestaurents";
+import useOnline from "../hooks/useOnline"
 import Shimmer from "./Shimmer";
 
 const Body = () => {
@@ -9,39 +12,26 @@ const Body = () => {
 
   // searchText is the local state variable
   const [searchText, setSearchText] = useState(""); // To create State Variables
-  const [restaurents, setRestaurents] = useState([]);
+  //const [restaurents, setRestaurents] = useState([]);
   const [filteredRestaurents, setFilteredRestaurents] = useState([])
-
+  const restaurents = useRestaurents();
+  const isOnline = useOnline();
   const onSearch = () => {
-    const restuarents = restaurents.filter((restaurent) => {
-      return restaurent.data?.name?.toLowerCase().includes(searchText.toLocaleLowerCase());
-    });
-    setFilteredRestaurents(restuarents);
+    const filteresRestaurents = filterRestaurents(searchText, restaurents)
+    setFilteredRestaurents(filteresRestaurents);
   };
 
-  // Hook is a function 
   useEffect(() => {
-    getRestaurents();
-  }, []);
-
-  const getRestaurents = async() => {
-    const url = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=14.6818877&lng=77.6005911&page_type=DESKTOP_WEB_LISTING'
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-      mode: 'no-cors',
-    };
-
-    const data = await fetch(url)
-    const json = await data.json();
-    setRestaurents(json?.data?.cards[2]?.data?.data?.cards)
-    setFilteredRestaurents(json?.data?.cards[2]?.data?.data?.cards)
-  }
-
+    setFilteredRestaurents(restaurents);
+  }, [restaurents])
 // Shimmer UI
 // conditional rendering
 
   if(!filteredRestaurents) return <h1>No Restaurents match your filter</h1>
+
+  if(!isOnline) {
+    return <h1>🔴 Offline, please check your internet connectiton!!</h1>
+   }
 
   return ( restaurents.length === 0 ? <Shimmer/> : 
     <>

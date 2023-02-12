@@ -5,13 +5,36 @@ class Profile extends React.Component {
     super(props);
     // Create State
     this.state = {
-      count: 0,
-    };
+        userInfo : "Dummy Name",
+        location : "Dummy Location"
+    }
     console.log(` ${this.props.name} constructor`);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    // this will be called only once after first render
+    const data = await fetch("https://api.github.com/users/praveenreddy3621")
+    const json = await data.json();
+    console.log(json)
+    this.setState({
+        userInfo: json
+    })
+
+    this.timer = setInterval(() => {
+        console.log("I am timer")
+    }, 2000)
     console.log(` ${this.props.name} componentDidMount`);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // this will be called only when setState, new props or force update()
+    //if(this.state.count != prevState.)
+    console.log(` ${this.props.name} componentDidUpdate`)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer)
+    console.log(` ${this.props.name} componentWillUnmount`)
   }
 
   render() {
@@ -20,18 +43,9 @@ class Profile extends React.Component {
     return (
       <div>
         <h1>Profile Class Component </h1>
-        <h2>Name: {this.props.name}</h2>
-        <h3>Count: {count}</h3>
-        <button
-          onClick={() => {
-            // we never mutate the state directly
-            this.setState({
-              count: 1,
-            });
-          }}
-        >
-          Count
-        </button>
+        <img src={this.state.userInfo.avatar_url}/>
+        <h2>Name: {this.state.userInfo.name}</h2>
+        <h2>Location: {this.state.userInfo.location}</h2>
       </div>
     );
   }
