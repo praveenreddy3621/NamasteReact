@@ -1,4 +1,8 @@
-#container {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* #container {
     background-color: yellow;
 }
 
@@ -75,4 +79,4 @@ li {
 
 .menu-list {
     border: 2px solid gray;
-}
+} */

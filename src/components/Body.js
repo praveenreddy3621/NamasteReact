@@ -2,7 +2,7 @@ import RestaurentCard from "./RestaurentCard";
 import { useState, useEffect } from "react";
 import {filterRestaurents} from "../utils/helper"
 import useRestaurents from "../hooks/useRestaurents";
-import useOnline from "../hooks/useOnline"
+import useOnline from "../hooks/useOnline";
 import Shimmer from "./Shimmer";
 
 const Body = () => {
@@ -33,11 +33,11 @@ const Body = () => {
     return <h1>🔴 Offline, please check your internet connectiton!!</h1>
    }
 
-  return ( restaurents.length === 0 ? <Shimmer/> : 
+  return ( restaurents?.length === 0 ? <Shimmer/> : 
     <>
-      <div className="search-container">
+      <div className="p-5 bg-pink-50 my-5">
         <input
-          className="search-input"
+          className="p-2 focus:bg-green-200"
           type="text"
           placeholder="search"
           value={searchText}
@@ -45,11 +45,11 @@ const Body = () => {
             setSearchText(e.target.value);
           }}
         />
-        <button className="search-button" onClick={onSearch}>
+        <button className="p-2 m-2 bg-purple-900 text-white rounded-md hover:bg-red-400" onClick={onSearch}>
           Search
         </button>
       </div>
-      <div key="body-key" className="body">
+      <div key="body-key" className="flex flex-wrap">
         {/* <input type="text" /> */}
         {filteredRestaurents && filteredRestaurents.map((restaurent) => {
           return (

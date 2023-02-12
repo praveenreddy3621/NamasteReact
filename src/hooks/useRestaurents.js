@@ -9,7 +9,7 @@ const useRestaurents = () => {
     const data = await fetch(url);
     const json = await data.json();
 
-    setRestaurents(json?.data?.cards[2]?.data?.data?.cards);
+    setRestaurents(json?.data?.cards[0]?.data?.data?.cards);
   };
 
   useEffect(() => {
